@@ -37,6 +37,12 @@ for (i, imagePath) in enumerate(imagePaths):
 	# load the input image and convert it from RGB (OpenCV ordering)
 	# to dlib ordering (RGB)
 	image = cv2.imread(imagePath)
+	if image.shape[1] > 800
+		r = 800.0 / image.shape[1]
+		dim = (800, int(image.shape[0] * r))
+		# perform the actual resizing of the image and show it
+		image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+
 	rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# detect the (x, y)-coordinates of the bounding boxes
