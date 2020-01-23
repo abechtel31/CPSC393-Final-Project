@@ -74,8 +74,10 @@ for encoding in encodings:
 		print(args['image'])
 		imgName = args['image'].replace(".png","")
 		imgName = args['image'].replace(".jpg", "")
+		imgName = args['image'].replace(".jpeg", "")
+		imgName = args['image'].replace('examples/', '')
 
-		newPath = imgName
+		newPath = "output/" + imgName
 
 		f = open(newPath + '.txt', 'w')
 		f.write('Name of photographed astronaut: ' + name)
