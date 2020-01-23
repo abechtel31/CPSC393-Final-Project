@@ -24,6 +24,12 @@ data = pickle.loads(open(args["encodings"], "rb").read())
 
 # load the input image and convert it from BGR to RGB
 image = cv2.imread(args["image"])
+r = 1000.0 / image.shape[1]
+dim = (1000, int(image.shape[0] * r))
+
+# perform the actual resizing of the image and show it
+image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # detect the (x, y)-coordinates of the bounding boxes corresponding
