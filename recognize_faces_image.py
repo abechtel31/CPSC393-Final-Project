@@ -20,6 +20,7 @@ import cv2
 import os
 import operator
 import math
+import sys
 
 #convert a distance to a confidence, not percent
 def face_distance_to_conf(face_distance, face_match_threshold=0.6):
@@ -36,6 +37,10 @@ def face_distance_to_conf(face_distance, face_match_threshold=0.6):
 def readImage(im):
 	# load the input image and convert it from BGR to RGB
 	image = cv2.imread(im)
+
+	if image is None: #the image file counld not be loaded
+		raise TypeError
+
 	r = 1000.0 / image.shape[1]
 	dim = (1000, int(image.shape[0] * r))
 
@@ -90,7 +95,12 @@ def main():
 	print("[INFO] loading encodings...")
 	data = pickle.loads(open(args["encodings"], "rb").read())
 
-	image = readImage(args["image"])
+	try:
+		image = readImage(args["image"])
+	except TypeError:
+		print("The file image file was not properly loaded")
+		sys.exit(1)
+
 	rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# detect the (x, y)-coordinates of the bounding boxes corresponding
@@ -145,9 +155,9 @@ def main():
 				name = max(counts, key=counts.get)
 
 			distance = distDict.get(name)
-		# update the list of names
-		names.append(name)
-		distances.append(distance)
+			# update the list of names
+			names.append(name)
+			distances.append(distance)
 
 	printToFile(args['image'], names, distances)
 	makeBox(name, names, image, boxes)

@@ -1,0 +1,3 @@
+Name of photographed astronaut: Timothy_Peake. Confidence: 0.8525017178492125
+Name of photographed astronaut: Timothy_Kopra. Confidence: 0.9014661467947933
+Name of photographed astronaut: Jeffrey_Williams. Confidence: 0.7828981333318585

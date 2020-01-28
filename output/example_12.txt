@@ -1,0 +1,3 @@
+Name of photographed astronaut: Luca_Parmitano. Confidence: 0.9131794486079514
+Name of photographed astronaut: Christopher_Cassidy. Confidence: 0.7941957412237844
+Name of photographed astronaut: Karen_Nyberg. Confidence: 0.915077775164594
