@@ -142,7 +142,6 @@ def main():
 			counts = {}
 			distDict = {}
 
-
 			# loop over the matched indexes and maintain a count for each recognized face
 			for i in matchedIdxs:
 				name = data["names"][i]
@@ -161,13 +160,12 @@ def main():
 
 			distance = distDict.get(name)
 
-			# update the list of names and distances
-			names.append(name)
-			distances.append(distance)
+		# update the list of names and distances
+		names.append(name)
+		distances.append(distance)
 
 	printToFile(args['image'], names, distances)
 	makeBox(name, names, image, boxes)
-
 
 	# show the output image
 	cv2.imshow("Image", image)
