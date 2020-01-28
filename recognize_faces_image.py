@@ -1,9 +1,9 @@
 #!/usr/bin/env Python
 # -*- coding: utf-8 -*-
 
-### Names:
-# IDs:
-# Emails:
+### Names: Abby Bechtel, Nic Cordova, Nate Everett, Suleiman Karkoutli, Matthew Parnham
+# IDs: 2312284, 2302109, 2296318, 2275013
+# Emails: abechtel@chapman.edu, cordova@chapman.edu, everett@chapman.edu, karko101@chapman.edu, parnham@chapman.edu
 # Course: CPSC393 Interterm 2020
 # Assignment: Final
 ###
