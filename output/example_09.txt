@@ -1,2 +1,2 @@
-Name of photographed astronaut: Frank_Culbertson. Confidence: 0.7524860124030986
-Name of photographed astronaut: Guy_Laliberte. Confidence: 0.5864913657280078
+name, confidence
+Unknown, 0.45474723080107915

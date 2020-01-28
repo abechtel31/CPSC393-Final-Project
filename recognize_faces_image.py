@@ -130,7 +130,7 @@ def main():
 		# attempt to match each face in the input image to our known
 		# encodings
 		matches = face_recognition.compare_faces(data["encodings"],
-			encoding, tolerance = 0.5)
+			encoding, tolerance = 0.55)
 		#see how far apart the test image is from the known faces
 		faceDistances = face_recognition.face_distance(data["encodings"], encoding)
 		name = "Unknown"
@@ -151,19 +151,18 @@ def main():
 			for i, faceDistance in enumerate(faceDistances):
 				distDict[data["names"][i]] = faceDistance
 
+			name = max(counts, key=counts.get)
+
 			# determine the recognized face with the largest number of votes
 			if name in names:
 				secondVote = list(sorted(counts.values()))[-2]
 				name = list(counts.keys())[list(counts.values()).index(secondVote)]
 
-			else:
-				name = max(counts, key=counts.get)
-
 			distance = distDict.get(name)
+			distances.append(distance)
 
 		# update the list of names and distances
 		names.append(name)
-		distances.append(distance)
 
 	printToFile(args['image'], names, distances)
 	makeBox(name, names, image, boxes)
