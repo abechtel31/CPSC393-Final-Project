@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ### Names: Abby Bechtel, Nic Cordova, Nate Everett, Suleiman Karkoutli, Matthew Parnham
-# IDs: 2312284, 2302109, 2296318, 2275013
+# IDs: 2312284, 2302109, 2296318, 2275013, 2287511
 # Emails: abechtel@chapman.edu, cordova@chapman.edu, everett@chapman.edu, karko101@chapman.edu, parnham@chapman.edu
 # Course: CPSC393 Interterm 2020
 # Assignment: Final
@@ -72,9 +72,10 @@ def printToFile(im, fNames, fDist):
 
 	try:
 		f = open(newPath + ".txt", "w")
+		f.write("name, confidence\n")
 		for x,y in zip(fNames, fDist):
 			confidence = face_distance_to_conf(y, 0.5)
-			f.write("Name of photographed astronaut: " + x + ". Confidence: " + str(confidence) + "\n")
+			f.write(x + ", " + str(confidence) + "\n")
 		f.close()
 
 	except IOError:
