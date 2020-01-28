@@ -51,7 +51,7 @@ for (i, imagePath) in enumerate(imagePaths):
 		model=args["detection_method"])
 
 	# compute the facial embedding for the face
-	encodings = face_recognition.face_encodings(rgb, boxes)
+	encodings = face_recognition.face_encodings(rgb, boxes, num_jitters = 10)
 
 	# loop over the encodings
 	for encoding in encodings:

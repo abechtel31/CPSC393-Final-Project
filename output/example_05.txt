@@ -1,0 +1,6 @@
+pName of photographed astronaut: Koichi_Wakata. Confidence: 0.9436721897461909
+Name of photographed astronaut: Daniel_Barry. Confidence: 0.8930679773016985
+Name of photographed astronaut: Unknown. Confidence: 0.8930679773016985
+Name of photographed astronaut: Brian_Duffy. Confidence: 0.9538563302732227
+Name of photographed astronaut: Brent_Jett. Confidence: 0.8687975505679331
+Name of photographed astronaut: Leroy_Chiao. Confidence: 0.917695157972648
