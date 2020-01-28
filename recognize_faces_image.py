@@ -1,5 +1,15 @@
+#!/usr/bin/env Python
+# -*- coding: utf-8 -*-
+
+### Names:
+# IDs:
+# Emails:
+# Course: CPSC393 Interterm 2020
+# Assignment: Final
+###
+
 """
-This program uses the face_recognition package to identify visitors to the International Space Station in photos
+This program module uses the face_recognition package to identify visitors to the International Space Station in photos.
 
 The classifier is first trained on a set of labeled (known) faces and can then predict the person
 in an unknown image by finding the similar faces (images with closet face-features under eucledian distance)
@@ -12,7 +22,6 @@ Usage:
 2. Run the command: python recognize_faces_image.py --encodings encodings.pickle --image examples/test_image.jpg
 """
 
-# import the necessary packages
 import face_recognition
 import argparse
 import pickle
@@ -22,7 +31,7 @@ import operator
 import math
 import sys
 
-#convert a distance to a confidence, not percent
+#convert a distance to a confidence through normalization, not exact percent
 def face_distance_to_conf(face_distance, face_match_threshold=0.6):
 	if face_distance > face_match_threshold:
 		range = (1.0 - face_match_threshold)
@@ -33,18 +42,18 @@ def face_distance_to_conf(face_distance, face_match_threshold=0.6):
 		linear_val = 1.0 - (face_distance / (range * 2.0))
 		return linear_val + ((1.0 - linear_val) * math.pow((linear_val - 0.5) * 2, 0.2))
 
-#reads an image in from command line arg
+#reads an image in from given command line arg
 def readImage(im):
 	# load the input image and convert it from BGR to RGB
 	image = cv2.imread(im)
 
-	if image is None: #the image file counld not be loaded
+	if image is None: #the image file could not be loaded
 		raise TypeError
 
 	r = 1000.0 / image.shape[1]
 	dim = (1000, int(image.shape[0] * r))
 
-	# perform the actual resizing of the image and show it
+	# perform the actual resizing of the image
 	image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
 	return image
 
@@ -71,6 +80,7 @@ def printToFile(im, fNames, fDist):
 	except IOError:
 		print("Wrong path provided")
 
+#makes the box over the face in the image
 def makeBox(fname, fnames, im, fBoxes):
 	# loop over the recognized faces
 	for ((top, right, bottom, left), fname) in zip(fBoxes, fnames):
@@ -81,7 +91,7 @@ def makeBox(fname, fnames, im, fBoxes):
 			0.75, (0, 255, 0), 2)
 
 def main():
-	# construct the argument parser and parse the arguments
+	#parse the arguments
 	ap = argparse.ArgumentParser()
 	ap.add_argument("-e", "--encodings", required=True,
 		help="path to serialized db of facial encodings")
@@ -104,8 +114,7 @@ def main():
 	rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# detect the (x, y)-coordinates of the bounding boxes corresponding
-	# to each face in the input image, then compute the facial embeddings
-	# for each face
+	# to each face in the input image, then compute the facial embeddings for each face
 	print("[INFO] recognizing faces...")
 	boxes = face_recognition.face_locations(rgb,
 		model=args["detection_method"])
@@ -128,15 +137,13 @@ def main():
 		# check to see if we have found a match
 		if True in matches:
 			# find the indexes of all matched faces then initialize a
-			# dictionary to count the total number of times each face
-			# was matched
+			# dictionary to count the total number of times each face was matched
 			matchedIdxs = [i for (i, b) in enumerate(matches) if b]
 			counts = {}
 			distDict = {}
 
 
-			# loop over the matched indexes and maintain a count for
-			# each recognized face
+			# loop over the matched indexes and maintain a count for each recognized face
 			for i in matchedIdxs:
 				name = data["names"][i]
 				counts[name] = counts.get(name, 0) + 1
@@ -144,9 +151,7 @@ def main():
 			for i, faceDistance in enumerate(faceDistances):
 				distDict[data["names"][i]] = faceDistance
 
-			# determine the recognized face with the largest number of
-			# votes (note: in the event of an unlikely tie Python will
-			# select first entry in the dictionary)
+			# determine the recognized face with the largest number of votes
 			if name in names:
 				secondVote = list(sorted(counts.values()))[-2]
 				name = list(counts.keys())[list(counts.values()).index(secondVote)]
@@ -155,7 +160,8 @@ def main():
 				name = max(counts, key=counts.get)
 
 			distance = distDict.get(name)
-			# update the list of names
+
+			# update the list of names and distances
 			names.append(name)
 			distances.append(distance)
 
