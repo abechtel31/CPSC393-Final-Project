@@ -6,6 +6,8 @@
 # Emails: abechtel@chapman.edu, cordova@chapman.edu, everett@chapman.edu, karko101@chapman.edu, parnham@chapman.edu
 # Course: CPSC393 Interterm 2020
 # Assignment: Final
+
+# Sources: PyImageSearch https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
 ###
 
 """
@@ -25,7 +27,7 @@ import pickle
 import cv2
 import os
 
-#reads an image in from given command line arg
+# Reads an image in from given command line arg
 def readImage(im):
 	# load the input image and convert it from BGR to RGB
 	image = cv2.imread(im)
